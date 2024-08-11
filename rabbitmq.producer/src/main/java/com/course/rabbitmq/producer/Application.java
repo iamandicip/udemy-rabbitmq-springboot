@@ -17,7 +17,7 @@ public class Application implements CommandLineRunner {
     private static final List<String> TYPES = List.of("jpg", "png", "svg");
 
     @Autowired
-    private PictureProducer pictureProducer;
+    private PictureProducer2 pictureProducer;
 
 
     public static void main(String[] args) {
