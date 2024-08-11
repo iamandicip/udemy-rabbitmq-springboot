@@ -1,12 +1,13 @@
 package com.course.rabbitmq.producer;
 
-import com.course.rabbitmq.producer.entity.Furniture;
+import com.course.rabbitmq.producer.entity.Picture;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 @SpringBootApplication
 public class Application implements CommandLineRunner {
@@ -22,8 +23,11 @@ public class Application implements CommandLineRunner {
 //    @Autowired
 //    private MyPictureProducer pictureProducer;
 
+//    @Autowired
+//    private FurnitureProducer furnitureProducer;
+
     @Autowired
-    private FurnitureProducer furnitureProducer;
+    private RetryPictureProducer retryPictureProducer;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -31,26 +35,26 @@ public class Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        for (int i = 0; i < 10; i++) {
-            var furniture = new Furniture();
-            furniture.setName("Furniture " + i);
-            furniture.setColor(COLORS.get(i % COLORS.size()));
-            furniture.setMaterial(MATERIALS.get(i % MATERIALS.size()));
-
-            furnitureProducer.sendMessage(furniture);
-        }
-
-        //        for (int i = 0; i < 10; i++) {
-//            var picture = new Picture();
-//            picture.setName("Picture " + i);
+//        for (int i = 0; i < 10; i++) {
+//            var furniture = new Furniture();
+//            furniture.setName("Furniture " + i);
+//            furniture.setColor(COLORS.get(i % COLORS.size()));
+//            furniture.setMaterial(MATERIALS.get(i % MATERIALS.size()));
 //
-//            picture.setType(TYPES.get(i % TYPES.size()));
-//            picture.setSource(SOURCES.get(i % SOURCES.size()));
-//
-//            // random size
-//            picture.setSize(ThreadLocalRandom.current().nextLong(9001, 10000));
-//
-//            pictureProducer.sendMessage(picture);
+//            furnitureProducer.sendMessage(furniture);
 //        }
+
+        for (int i = 0; i < 10; i++) {
+            var picture = new Picture();
+            picture.setName("Picture " + i);
+
+            picture.setType(TYPES.get(i % TYPES.size()));
+            picture.setSource(SOURCES.get(i % SOURCES.size()));
+
+            // random size
+            picture.setSize(ThreadLocalRandom.current().nextLong(9001, 10000));
+
+            retryPictureProducer.sendMessage(picture);
+        }
     }
 }
