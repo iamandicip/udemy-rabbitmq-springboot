@@ -17,7 +17,7 @@ public class Application implements CommandLineRunner {
     private static final List<String> TYPES = List.of("jpg", "png", "svg");
 
     @Autowired
-    private PictureProducer2 pictureProducer;
+    private MyPictureProducer pictureProducer;
 
 
     public static void main(String[] args) {
@@ -26,7 +26,7 @@ public class Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 1; i++) {
             var picture = new Picture();
             picture.setName("Picture " + i);
 
@@ -34,7 +34,7 @@ public class Application implements CommandLineRunner {
             picture.setSource(SOURCES.get(i % SOURCES.size()));
 
             // random size
-            picture.setSize(ThreadLocalRandom.current().nextLong(1, 10000));
+            picture.setSize(ThreadLocalRandom.current().nextLong(9001, 10000));
 
             pictureProducer.sendMessage(picture);
         }
