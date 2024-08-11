@@ -1,0 +1,27 @@
+meta {
+  name: Bindings - x-dummy
+  type: http
+  seq: 52
+}
+
+post {
+  url: {{rabbitmqUrl}}/api/bindings/{{rabbitmqVirtualHost}}/e/:exchangeName/q/:queueName
+  body: json
+  auth: basic
+}
+
+params:path {
+  exchangeName: x.dummy
+  queueName: q.dummy
+}
+
+auth:basic {
+  username: guest
+  password: guest
+}
+
+body:json {
+  {
+      "routing_key": ""
+  }
+}

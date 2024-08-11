@@ -1,0 +1,27 @@
+meta {
+  name: Bind Dead Exchange - Queue -jpg-
+  type: http
+  seq: 16
+}
+
+post {
+  url: {{rabbitmqUrl}}/api/bindings/{{rabbitmqVirtualHost}}/e/:exchangeName/q/:queueName
+  body: json
+  auth: basic
+}
+
+params:path {
+  exchangeName: x.guideline.dead
+  queueName: q.guideline.image.dead
+}
+
+auth:basic {
+  username: guest
+  password: guest
+}
+
+body:json {
+  {
+      "routing_key": "jpg"
+  }
+}

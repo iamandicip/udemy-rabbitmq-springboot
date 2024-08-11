@@ -1,0 +1,27 @@
+meta {
+  name: Bindings - x-picture2 5
+  type: http
+  seq: 22
+}
+
+post {
+  url: {{rabbitmqUrl}}/api/bindings/{{rabbitmqVirtualHost}}/e/:exchangeName/q/:queueName
+  body: json
+  auth: basic
+}
+
+params:path {
+  exchangeName: x.picture2
+  queueName: q.picture.log
+}
+
+auth:basic {
+  username: guest
+  password: guest
+}
+
+body:json {
+  {
+      "routing_key": "*.large.svg"
+  }
+}

@@ -1,0 +1,21 @@
+meta {
+  name: Bindings - x-hr 2
+  type: http
+  seq: 8
+}
+
+post {
+  url: {{rabbitmqUrl}}/api/bindings/{{rabbitmqVirtualHost}}/e/:exchangeName/q/:queueName
+  body: none
+  auth: basic
+}
+
+params:path {
+  exchangeName: x.hr
+  queueName: q.hr.marketing
+}
+
+auth:basic {
+  username: guest
+  password: guest
+}

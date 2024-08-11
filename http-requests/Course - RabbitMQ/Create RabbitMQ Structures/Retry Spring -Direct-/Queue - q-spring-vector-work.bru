@@ -1,0 +1,30 @@
+meta {
+  name: Queue - q-spring-vector-work
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{rabbitmqUrl}}/api/queues/{{rabbitmqVirtualHost}}/:queueName
+  body: json
+  auth: basic
+}
+
+params:path {
+  queueName: q.spring.vector.work
+}
+
+auth:basic {
+  username: guest
+  password: guest
+}
+
+body:json {
+  {
+      "auto_delete": false,
+      "durable": true,
+      "arguments": {
+          "x-dead-letter-exchange": "x.spring.dead"
+      }
+  }
+}

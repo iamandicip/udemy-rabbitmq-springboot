@@ -1,0 +1,20 @@
+meta {
+  name: Get specific queue
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{rabbitmqUrl}}/api/queues/{{rabbitmqVirtualHost}}/:queueName
+  body: none
+  auth: basic
+}
+
+params:path {
+  queueName: course.hello
+}
+
+auth:basic {
+  username: guest
+  password: guest
+}

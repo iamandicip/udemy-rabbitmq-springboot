@@ -1,0 +1,30 @@
+meta {
+  name: Create Work Exchange
+  type: http
+  seq: 1
+}
+
+put {
+  url: {{rabbitmqUrl}}/api/exchanges/{{rabbitmqVirtualHost}}/:exchangeName
+  body: json
+  auth: basic
+}
+
+params:path {
+  exchangeName: x.guideline.work
+}
+
+auth:basic {
+  username: guest
+  password: guest
+}
+
+body:json {
+  {
+      "type": "direct",
+      "auto_delete": false,
+      "durable": true,
+      "internal": false,
+      "arguments": {}
+  }
+}

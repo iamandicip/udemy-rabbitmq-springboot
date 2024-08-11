@@ -1,0 +1,30 @@
+meta {
+  name: Exchange - x-invoice-cancel
+  type: http
+  seq: 68
+}
+
+put {
+  url: {{rabbitmqUrl}}/api/exchanges/{{rabbitmqVirtualHost}}/:exchangeName
+  body: json
+  auth: basic
+}
+
+params:path {
+  exchangeName: x.invoice.cancel
+}
+
+auth:basic {
+  username: guest
+  password: guest
+}
+
+body:json {
+  {
+      "type": "fanout",
+      "auto_delete": false,
+      "durable": true,
+      "internal": false,
+      "arguments": {}
+  }
+}

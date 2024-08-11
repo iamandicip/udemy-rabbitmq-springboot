@@ -1,0 +1,29 @@
+meta {
+  name: Queue - q-mypicture-dlx
+  type: http
+  seq: 32
+}
+
+put {
+  url: {{rabbitmqUrl}}/api/queues/{{rabbitmqVirtualHost}}/:queueName
+  body: json
+  auth: basic
+}
+
+params:path {
+  queueName: q.mypicture.dlx
+}
+
+auth:basic {
+  username: guest
+  password: guest
+}
+
+body:json {
+  {
+     "auto_delete": false,
+     "durable": true,
+     "arguments": {
+     }
+  }
+}

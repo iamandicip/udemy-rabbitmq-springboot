@@ -1,0 +1,21 @@
+meta {
+  name: Bind Work Exchange - Queue -accounting-
+  type: http
+  seq: 11
+}
+
+post {
+  url: {{rabbitmqUrl}}/api/bindings/{{rabbitmqVirtualHost}}/e/:exchangeName/q/:queueName
+  body: none
+  auth: basic
+}
+
+params:path {
+  exchangeName: x.guideline2.work
+  queueName: q.guideline2.accounting.work
+}
+
+auth:basic {
+  username: guest
+  password: guest
+}

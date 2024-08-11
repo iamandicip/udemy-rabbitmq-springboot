@@ -1,0 +1,27 @@
+meta {
+  name: Bindings - x-invoice-cancel
+  type: http
+  seq: 70
+}
+
+post {
+  url: {{rabbitmqUrl}}/api/bindings/{{rabbitmqVirtualHost}}/e/:exchangeName/q/:queueName
+  body: json
+  auth: basic
+}
+
+params:path {
+  exchangeName: x.invoice.cancel
+  queueName: q.invoice.cancel
+}
+
+auth:basic {
+  username: guest
+  password: guest
+}
+
+body:json {
+  {
+      "routing_key": ""
+  }
+}

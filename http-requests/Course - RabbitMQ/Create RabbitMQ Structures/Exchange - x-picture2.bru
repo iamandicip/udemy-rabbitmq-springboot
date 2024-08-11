@@ -1,0 +1,30 @@
+meta {
+  name: Exchange - x-picture2
+  type: http
+  seq: 15
+}
+
+put {
+  url: {{rabbitmqUrl}}/api/exchanges/{{rabbitmqVirtualHost}}/:exchangeName
+  body: json
+  auth: basic
+}
+
+params:path {
+  exchangeName: x.picture2
+}
+
+auth:basic {
+  username: guest
+  password: guest
+}
+
+body:json {
+  {
+      "type": "topic",
+      "auto_delete": false,
+      "durable": true,
+      "internal": false,
+      "arguments": {}
+  }
+}

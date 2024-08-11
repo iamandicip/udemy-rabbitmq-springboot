@@ -1,0 +1,21 @@
+meta {
+  name: Bind Work Exchange - Queue -marketing-
+  type: http
+  seq: 12
+}
+
+post {
+  url: {{rabbitmqUrl}}/api/bindings/{{rabbitmqVirtualHost}}/e/:exchangeName/q/:queueName
+  body: json
+  auth: basic
+}
+
+params:path {
+  exchangeName: x.guideline2.work
+  queueName: q.guideline2.marketing.work
+}
+
+auth:basic {
+  username: guest
+  password: guest
+}

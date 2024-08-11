@@ -1,0 +1,29 @@
+meta {
+  name: Queue - q-direct-one
+  type: http
+  seq: 41
+}
+
+put {
+  url: {{rabbitmqUrl}}/api/queues/{{rabbitmqVirtualHost}}/:queueName
+  body: json
+  auth: basic
+}
+
+params:path {
+  queueName: q.direct.one
+}
+
+auth:basic {
+  username: guest
+  password: guest
+}
+
+body:json {
+  {
+     "auto_delete": false,
+     "durable": true,
+     "arguments": {
+     }
+  }
+}

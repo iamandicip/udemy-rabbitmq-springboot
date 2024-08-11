@@ -1,0 +1,27 @@
+meta {
+  name: Bindings - dead 2
+  type: http
+  seq: 10
+}
+
+post {
+  url: {{rabbitmqUrl}}/api/bindings/{{rabbitmqVirtualHost}}/e/:exchangeName/q/:queueName
+  body: json
+  auth: basic
+}
+
+params:path {
+  exchangeName: x.spring2.dead
+  queueName: q.spring2.marketing.dead
+}
+
+auth:basic {
+  username: guest
+  password: guest
+}
+
+body:json {
+  {
+      "routing_key": "dead-marketing"
+  }
+}

@@ -1,0 +1,27 @@
+meta {
+  name: Bindings - x-picture2 4
+  type: http
+  seq: 21
+}
+
+post {
+  url: {{rabbitmqUrl}}/api/bindings/{{rabbitmqVirtualHost}}/e/:exchangeName/q/:queueName
+  body: json
+  auth: basic
+}
+
+params:path {
+  exchangeName: x.picture2
+  queueName: q.picture.filter
+}
+
+auth:basic {
+  username: guest
+  password: guest
+}
+
+body:json {
+  {
+      "routing_key": "mobile.#"
+  }
+}

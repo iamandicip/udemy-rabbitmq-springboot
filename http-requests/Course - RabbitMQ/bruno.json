@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "Course - RabbitMQ",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

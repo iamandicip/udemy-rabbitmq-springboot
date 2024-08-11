@@ -1,0 +1,28 @@
+meta {
+  name: Consume message from queue
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{rabbitmqUrl}}/api/queues/{{rabbitmqVirtualHost}}/:queueName/get
+  body: json
+  auth: basic
+}
+
+params:path {
+  queueName: q.from-api
+}
+
+auth:basic {
+  username: guest
+  password: guest
+}
+
+body:json {
+  {
+      "count": 5,
+      "ackmode": "ack_requeue_false",
+      "encoding": "auto"
+  }
+}

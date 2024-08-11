@@ -1,0 +1,30 @@
+meta {
+  name: Create Wait Exchange
+  type: http
+  seq: 2
+}
+
+put {
+  url: {{rabbitmqUrl}}/api/exchanges/{{rabbitmqVirtualHost}}/:exchangeName
+  body: json
+  auth: basic
+}
+
+params:path {
+  exchangeName: x.guideline.wait
+}
+
+auth:basic {
+  username: guest
+  password: guest
+}
+
+body:json {
+  {
+      "type": "direct",
+      "auto_delete": false,
+      "durable": true,
+      "internal": false,
+      "arguments": {}
+  }
+}

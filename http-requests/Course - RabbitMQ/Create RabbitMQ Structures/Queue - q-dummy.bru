@@ -1,0 +1,29 @@
+meta {
+  name: Queue - q-dummy
+  type: http
+  seq: 51
+}
+
+put {
+  url: {{rabbitmqUrl}}/api/queues/{{rabbitmqVirtualHost}}/:queueName
+  body: json
+  auth: basic
+}
+
+params:path {
+  queueName: q.dummy
+}
+
+auth:basic {
+  username: guest
+  password: guest
+}
+
+body:json {
+  {
+     "auto_delete": false,
+     "durable": true,
+     "arguments": {
+     }
+  }
+}

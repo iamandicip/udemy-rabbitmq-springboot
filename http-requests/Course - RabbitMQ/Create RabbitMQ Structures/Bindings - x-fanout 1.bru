@@ -1,0 +1,21 @@
+meta {
+  name: Bindings - x-fanout 1
+  type: http
+  seq: 43
+}
+
+post {
+  url: {{rabbitmqUrl}}/api/bindings/{{rabbitmqVirtualHost}}/e/:exchangeName/q/:queueName
+  body: none
+  auth: basic
+}
+
+params:path {
+  exchangeName: x.fanout
+  queueName: q.fanout.one
+}
+
+auth:basic {
+  username: guest
+  password: guest
+}

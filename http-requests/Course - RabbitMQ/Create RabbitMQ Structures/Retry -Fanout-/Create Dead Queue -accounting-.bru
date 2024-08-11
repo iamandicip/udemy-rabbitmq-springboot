@@ -1,0 +1,30 @@
+meta {
+  name: Create Dead Queue -accounting-
+  type: http
+  seq: 9
+}
+
+put {
+  url: {{rabbitmqUrl}}/api/queues/{{rabbitmqVirtualHost}}/:queueName
+  body: json
+  auth: basic
+}
+
+params:path {
+  queueName: q.guideline2.accounting.dead
+}
+
+auth:basic {
+  username: guest
+  password: guest
+}
+
+body:json {
+  {
+      "auto_delete": false,
+      "durable": true,
+      "arguments": {
+          "x-queue-mode": "lazy"
+      }
+  }
+}

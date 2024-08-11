@@ -1,0 +1,27 @@
+meta {
+  name: Bindings - dead 2
+  type: http
+  seq: 11
+}
+
+post {
+  url: {{rabbitmqUrl}}/api/bindings/{{rabbitmqVirtualHost}}/e/:exchangeName/q/:queueName
+  body: json
+  auth: basic
+}
+
+params:path {
+  exchangeName: x.spring.dead
+  queueName: q.spring.image.dead
+}
+
+auth:basic {
+  username: guest
+  password: guest
+}
+
+body:json {
+  {
+      "routing_key": "png"
+  }
+}

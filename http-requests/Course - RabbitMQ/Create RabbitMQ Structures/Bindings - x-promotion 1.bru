@@ -1,0 +1,30 @@
+meta {
+  name: Bindings - x-promotion 1
+  type: http
+  seq: 26
+}
+
+post {
+  url: {{rabbitmqUrl}}/api/bindings/{{rabbitmqVirtualHost}}/e/:exchangeName/q/:queueName
+  body: json
+  auth: basic
+}
+
+params:path {
+  exchangeName: x.promotion
+  queueName: q.promotion.discount
+}
+
+auth:basic {
+  username: guest
+  password: guest
+}
+
+body:json {
+  {
+      "arguments": {
+          "color": "white",
+          "material": "wood"
+      }
+  }
+}

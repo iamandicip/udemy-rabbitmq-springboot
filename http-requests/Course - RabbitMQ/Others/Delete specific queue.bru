@@ -1,0 +1,25 @@
+meta {
+  name: Delete specific queue
+  type: http
+  seq: 4
+}
+
+delete {
+  url: {{rabbitmqUrl}}/api/queues/{{rabbitmqVirtualHost}}/:queueName?if-empty=true&if-unused=true
+  body: none
+  auth: basic
+}
+
+params:query {
+  if-empty: true
+  if-unused: true
+}
+
+params:path {
+  queueName: course.hellox
+}
+
+auth:basic {
+  username: guest
+  password: guest
+}

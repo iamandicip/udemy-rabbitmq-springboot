@@ -1,0 +1,29 @@
+meta {
+  name: Queue - course-employee
+  type: http
+  seq: 3
+}
+
+put {
+  url: {{rabbitmqUrl}}/api/queues/{{rabbitmqVirtualHost}}/:queueName
+  body: json
+  auth: basic
+}
+
+params:path {
+  queueName: course.employee
+}
+
+auth:basic {
+  username: guest
+  password: guest
+}
+
+body:json {
+  {
+     "auto_delete": false,
+     "durable": true,
+     "arguments": {
+     }
+  }
+}

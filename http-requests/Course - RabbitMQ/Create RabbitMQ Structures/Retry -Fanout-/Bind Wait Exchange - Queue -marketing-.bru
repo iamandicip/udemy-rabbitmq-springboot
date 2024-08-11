@@ -1,0 +1,27 @@
+meta {
+  name: Bind Wait Exchange - Queue -marketing-
+  type: http
+  seq: 14
+}
+
+post {
+  url: {{rabbitmqUrl}}/api/bindings/{{rabbitmqVirtualHost}}/e/:exchangeName/q/:queueName
+  body: json
+  auth: basic
+}
+
+params:path {
+  exchangeName: x.guideline2.wait
+  queueName: q.guideline2.marketing.wait
+}
+
+auth:basic {
+  username: guest
+  password: guest
+}
+
+body:json {
+  {
+      "routing_key": "marketing"
+  }
+}

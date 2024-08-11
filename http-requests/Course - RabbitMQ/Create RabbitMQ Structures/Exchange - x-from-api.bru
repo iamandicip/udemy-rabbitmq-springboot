@@ -1,0 +1,30 @@
+meta {
+  name: Exchange - x-from-api
+  type: http
+  seq: 47
+}
+
+put {
+  url: {{rabbitmqUrl}}/api/exchanges/{{rabbitmqVirtualHost}}/:exchangeName
+  body: json
+  auth: basic
+}
+
+params:path {
+  exchangeName: x.from-api
+}
+
+auth:basic {
+  username: guest
+  password: guest
+}
+
+body:json {
+  {
+      "type": "fanout",
+      "auto_delete": false,
+      "durable": true,
+      "internal": false,
+      "arguments": {}
+  }
+}

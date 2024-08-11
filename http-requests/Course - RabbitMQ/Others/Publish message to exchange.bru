@@ -1,0 +1,29 @@
+meta {
+  name: Publish message to exchange
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{rabbitmqUrl}}/api/exchanges/{{rabbitmqVirtualHost}}/:exchangeName/publish
+  body: json
+  auth: basic
+}
+
+params:path {
+  exchangeName: x.from-api
+}
+
+auth:basic {
+  username: guest
+  password: guest
+}
+
+body:json {
+  {
+      "properties": {},
+      "routing_key": "my-routing-key",
+      "payload": "my-payload",
+      "payload_encoding": "string"
+  }
+}

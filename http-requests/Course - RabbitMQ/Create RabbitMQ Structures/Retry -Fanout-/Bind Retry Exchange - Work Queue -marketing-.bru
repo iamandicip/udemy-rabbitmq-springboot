@@ -1,0 +1,27 @@
+meta {
+  name: Bind Retry Exchange - Work Queue -marketing-
+  type: http
+  seq: 18
+}
+
+post {
+  url: {{rabbitmqUrl}}/api/bindings/{{rabbitmqVirtualHost}}/e/:exchangeName/q/:queueName
+  body: json
+  auth: basic
+}
+
+params:path {
+  exchangeName: x.guideline2.retry
+  queueName: q.guideline2.marketing.work
+}
+
+auth:basic {
+  username: guest
+  password: guest
+}
+
+body:json {
+  {
+      "routing_key": "marketing"
+  }
+}

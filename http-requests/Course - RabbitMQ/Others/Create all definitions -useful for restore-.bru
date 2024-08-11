@@ -1,0 +1,16 @@
+meta {
+  name: Create all definitions -useful for restore-
+  type: http
+  seq: 8
+}
+
+post {
+  url: {{rabbitmqUrl}}/api/definitions/{{rabbitmqVirtualHost}}
+  body: json
+  auth: basic
+}
+
+auth:basic {
+  username: guest
+  password: guest
+}

@@ -1,0 +1,20 @@
+meta {
+  name: Purge specific queue
+  type: http
+  seq: 3
+}
+
+delete {
+  url: {{rabbitmqUrl}}/api/queues/{{rabbitmqVirtualHost}}/:queueName/contents
+  body: none
+  auth: basic
+}
+
+params:path {
+  queueName: course.hello
+}
+
+auth:basic {
+  username: guest
+  password: guest
+}

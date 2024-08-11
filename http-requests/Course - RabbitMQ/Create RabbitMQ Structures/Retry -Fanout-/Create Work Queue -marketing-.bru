@@ -1,0 +1,31 @@
+meta {
+  name: Create Work Queue -marketing-
+  type: http
+  seq: 6
+}
+
+put {
+  url: {{rabbitmqUrl}}/api/queues/{{rabbitmqVirtualHost}}/:queueName
+  body: json
+  auth: basic
+}
+
+params:path {
+  queueName: q.guideline2.marketing.work
+}
+
+auth:basic {
+  username: guest
+  password: guest
+}
+
+body:json {
+  {
+      "auto_delete": false,
+      "durable": true,
+      "arguments": {
+          "x-dead-letter-exchange": "x.guideline2.wait",
+          "x-dead-letter-routing-key": "marketing"
+      }
+  }
+}

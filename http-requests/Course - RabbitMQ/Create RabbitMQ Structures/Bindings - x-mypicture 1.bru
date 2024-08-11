@@ -1,0 +1,21 @@
+meta {
+  name: Bindings - x-mypicture 1
+  type: http
+  seq: 34
+}
+
+post {
+  url: {{rabbitmqUrl}}/api/bindings/{{rabbitmqVirtualHost}}/e/:exchangeName/q/:queueName
+  body: none
+  auth: basic
+}
+
+params:path {
+  exchangeName: x.mypicture
+  queueName: q.mypicture.image
+}
+
+auth:basic {
+  username: guest
+  password: guest
+}

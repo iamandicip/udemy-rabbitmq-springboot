@@ -1,0 +1,27 @@
+meta {
+  name: Bindings - work 2
+  type: http
+  seq: 8
+}
+
+post {
+  url: {{rabbitmqUrl}}/api/bindings/{{rabbitmqVirtualHost}}/e/:exchangeName/q/:queueName
+  body: json
+  auth: basic
+}
+
+params:path {
+  exchangeName: x.spring2.work
+  queueName: q.spring2.marketing.work
+}
+
+auth:basic {
+  username: guest
+  password: guest
+}
+
+body:json {
+  {
+      "routing_key": ""
+  }
+}

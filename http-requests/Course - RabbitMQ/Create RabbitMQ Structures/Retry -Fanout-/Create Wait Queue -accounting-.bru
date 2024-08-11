@@ -1,0 +1,32 @@
+meta {
+  name: Create Wait Queue -accounting-
+  type: http
+  seq: 7
+}
+
+put {
+  url: {{rabbitmqUrl}}/api/queues/{{rabbitmqVirtualHost}}/:queueName
+  body: json
+  auth: basic
+}
+
+params:path {
+  queueName: q.guideline2.accounting.wait
+}
+
+auth:basic {
+  username: guest
+  password: guest
+}
+
+body:json {
+  {
+      "auto_delete": false,
+      "durable": true,
+      "arguments": {
+          "x-dead-letter-exchange": "x.guideline2.retry",
+          "x-dead-letter-routing-key": "accounting",
+          "x-message-ttl": 30000
+      }
+  }
+}

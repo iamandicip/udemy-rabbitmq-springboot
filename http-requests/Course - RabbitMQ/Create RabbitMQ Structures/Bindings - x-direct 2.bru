@@ -1,0 +1,27 @@
+meta {
+  name: Bindings - x-direct 2
+  type: http
+  seq: 46
+}
+
+post {
+  url: {{rabbitmqUrl}}/api/bindings/{{rabbitmqVirtualHost}}/e/:exchangeName/q/:queueName
+  body: json
+  auth: basic
+}
+
+params:path {
+  exchangeName: x.direct
+  queueName: q.direct.two
+}
+
+auth:basic {
+  username: guest
+  password: guest
+}
+
+body:json {
+  {
+      "routing_key": "two"
+  }
+}

@@ -1,0 +1,27 @@
+meta {
+  name: Bind Wait Exchange - Queue -svg-
+  type: http
+  seq: 15
+}
+
+post {
+  url: {{rabbitmqUrl}}/api/bindings/{{rabbitmqVirtualHost}}/e/:exchangeName/q/:queueName
+  body: json
+  auth: basic
+}
+
+params:path {
+  exchangeName: x.guideline.wait
+  queueName: q.guideline.vector.wait
+}
+
+auth:basic {
+  username: guest
+  password: guest
+}
+
+body:json {
+  {
+      "routing_key": "svg"
+  }
+}

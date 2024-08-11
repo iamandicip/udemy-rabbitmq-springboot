@@ -1,0 +1,16 @@
+meta {
+  name: Get all definitions -useful for backup-
+  type: http
+  seq: 7
+}
+
+get {
+  url: {{rabbitmqUrl}}/api/definitions/{{rabbitmqVirtualHost}}
+  body: none
+  auth: basic
+}
+
+auth:basic {
+  username: guest
+  password: guest
+}

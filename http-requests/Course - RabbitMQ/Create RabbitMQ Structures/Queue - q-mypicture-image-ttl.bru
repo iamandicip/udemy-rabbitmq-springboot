@@ -1,0 +1,31 @@
+meta {
+  name: Queue - q-mypicture-image-ttl
+  type: http
+  seq: 33
+}
+
+put {
+  url: {{rabbitmqUrl}}/api/queues/{{rabbitmqVirtualHost}}/:queueName
+  body: json
+  auth: basic
+}
+
+params:path {
+  queueName: q.mypicture.image-ttl
+}
+
+auth:basic {
+  username: guest
+  password: guest
+}
+
+body:json {
+  {
+      "auto_delete": false,
+      "durable": true,
+      "arguments": {
+          "x-message-ttl": 5000,
+          "x-dead-letter-exchange": "x.mypicture.dlx"
+      }
+  }
+}
