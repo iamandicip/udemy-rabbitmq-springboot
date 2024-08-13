@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import java.time.LocalDate;
 import java.util.List;
 
+//@EnableScheduling
 @SpringBootApplication
 public class Application implements CommandLineRunner {
 
