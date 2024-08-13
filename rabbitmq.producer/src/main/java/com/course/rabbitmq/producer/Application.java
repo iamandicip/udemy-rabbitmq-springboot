@@ -1,13 +1,13 @@
 package com.course.rabbitmq.producer;
 
-import com.course.rabbitmq.producer.entity.Picture;
+import com.course.rabbitmq.producer.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.time.LocalDate;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 @SpringBootApplication
 public class Application implements CommandLineRunner {
@@ -26,8 +26,11 @@ public class Application implements CommandLineRunner {
 //    @Autowired
 //    private FurnitureProducer furnitureProducer;
 
+//    @Autowired
+//    private RetryPictureProducer retryPictureProducer;
+
     @Autowired
-    private RetryPictureProducer retryPictureProducer;
+    private RetryEmployeeJsonProducer retryEmployeeJsonProducer;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -43,18 +46,24 @@ public class Application implements CommandLineRunner {
 //
 //            furnitureProducer.sendMessage(furniture);
 //        }
+//
+//        for (int i = 0; i < 10; i++) {
+//            var picture = new Picture();
+//            picture.setName("Picture " + i);
+//
+//            picture.setType(TYPES.get(i % TYPES.size()));
+//            picture.setSource(SOURCES.get(i % SOURCES.size()));
+//
+//            // random size
+//            picture.setSize(ThreadLocalRandom.current().nextLong(9001, 10000));
+//
+//            retryPictureProducer.sendMessage(picture);
+//        }
 
         for (int i = 0; i < 10; i++) {
-            var picture = new Picture();
-            picture.setName("Picture " + i);
+            var emp = new Employee("Employee-" + i, null, LocalDate.now());
 
-            picture.setType(TYPES.get(i % TYPES.size()));
-            picture.setSource(SOURCES.get(i % SOURCES.size()));
-
-            // random size
-            picture.setSize(ThreadLocalRandom.current().nextLong(9001, 10000));
-
-            retryPictureProducer.sendMessage(picture);
+            retryEmployeeJsonProducer.sendMessage(emp);
         }
     }
 }
