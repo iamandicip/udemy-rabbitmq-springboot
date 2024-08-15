@@ -13,11 +13,27 @@
         </option>
       </GradleProjectSettings>
       <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/rabbitmq.consumer2" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/rabbitmq.consumer2" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/rabbitmq.producer" />
         <option name="gradleJvm" value="temurin-21" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/rabbitmq.producer" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/rabbitmq.producer2" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/rabbitmq.producer2" />
           </set>
         </option>
       </GradleProjectSettings>
