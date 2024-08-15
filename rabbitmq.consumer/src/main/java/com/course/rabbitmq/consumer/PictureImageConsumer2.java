@@ -8,9 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-@Service
+//@Service
 public class PictureImageConsumer2 {
 
     private static final Logger log = LoggerFactory.getLogger(PictureImageConsumer2.class);

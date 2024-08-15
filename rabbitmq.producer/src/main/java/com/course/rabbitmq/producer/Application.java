@@ -30,8 +30,14 @@ public class Application implements CommandLineRunner {
 //    @Autowired
 //    private RetryPictureProducer retryPictureProducer;
 
+//    @Autowired
+//    private RetryEmployeeJsonProducer retryEmployeeJsonProducer;
+
+//    @Autowired
+//    private SpringPictureProducer springPictureProducer;
+
     @Autowired
-    private RetryEmployeeJsonProducer retryEmployeeJsonProducer;
+    private SpringEmployeeJsonProducer springEmployeeJsonProducer;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -39,6 +45,17 @@ public class Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        var employee = new Employee("emp-spring", null, LocalDate.now());
+        springEmployeeJsonProducer.sendMessage(employee);
+
+//        var p = new Picture();
+//        p.setName("Spring picture");
+//        p.setSize(9500);
+//        p.setSource("web");
+//        p.setType("jpg");
+//
+//        springPictureProducer.sendMessage(p);
+
 //        for (int i = 0; i < 10; i++) {
 //            var furniture = new Furniture();
 //            furniture.setName("Furniture " + i);
@@ -61,10 +78,10 @@ public class Application implements CommandLineRunner {
 //            retryPictureProducer.sendMessage(picture);
 //        }
 
-        for (int i = 0; i < 10; i++) {
-            var emp = new Employee("Employee-" + i, null, LocalDate.now());
-
-            retryEmployeeJsonProducer.sendMessage(emp);
-        }
+//        for (int i = 0; i < 10; i++) {
+//            var emp = new Employee("Employee-" + i, null, LocalDate.now());
+//
+//            retryEmployeeJsonProducer.sendMessage(emp);
+//        }
     }
 }
