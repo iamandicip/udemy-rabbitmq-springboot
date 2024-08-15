@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: rabbitmq.consumer
+
+  rabbitmq:
+    addresses: "localhost:5672"
+    username: guest
+    password: guest
+    listener:
+      simple:
+        retry:
+          enabled: true
+          initial-interval: 3s
+          max-interval: 10s
+          max-attempts: 5
+          multiplier: 2
