@@ -11,6 +11,7 @@ public class SingleActiveProducer {
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
+    // this producer works best with the consistent hash exchange
     public void sendDummy() {
         for (int i = 0; i < 10_000; i++) {
             var message = new DummyMessage("Dummy-" + i, i);

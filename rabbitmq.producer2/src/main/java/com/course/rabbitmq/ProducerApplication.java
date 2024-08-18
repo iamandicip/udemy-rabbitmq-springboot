@@ -1,10 +1,13 @@
 package com.course.rabbitmq;
 
-import com.course.rabbitmq.producer.SingleActiveProducer;
+import com.course.rabbitmq.entity.DummyMessage;
+import com.course.rabbitmq.producer.ReliableProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.util.concurrent.TimeUnit;
 
 @SpringBootApplication
 public class ProducerApplication implements CommandLineRunner {
@@ -18,9 +21,11 @@ public class ProducerApplication implements CommandLineRunner {
 //    @Autowired
 //    private InvoiceProducer invoiceProducer;
 
-    @Autowired
-    private SingleActiveProducer singleActiveProducer;
+//    @Autowired
+//    private SingleActiveProducer singleActiveProducer;
 
+    @Autowired
+    private ReliableProducer reliableProducer;
 
     public static void main(String[] args) {
         SpringApplication.run(ProducerApplication.class, args);
@@ -28,7 +33,20 @@ public class ProducerApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        singleActiveProducer.sendDummy();
+        var dummyMessage = new DummyMessage("Dummy content", 1);
+
+        System.out.println("--------------------------------");
+        System.out.println("Calling sendMessageToInvalidExchange()");
+        reliableProducer.sendMessageToInvalidExchange(dummyMessage);
+
+        TimeUnit.SECONDS.sleep(2);
+
+        System.out.println("--------------------------------");
+        System.out.println("Calling sendWithInvalidRoutingKey()");
+        reliableProducer.sendMessageWithInvalidRoutingKey(dummyMessage);
+
+
+//        singleActiveProducer.sendDummy();
 
 //        for (int i = 0; i < 200; i++) {
 //            var invoiceNumber = "INV-" + (i % 60);
