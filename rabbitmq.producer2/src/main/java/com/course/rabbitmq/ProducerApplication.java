@@ -1,13 +1,11 @@
 package com.course.rabbitmq;
 
-import com.course.rabbitmq.entity.InvoiceCancelledMessage;
-import com.course.rabbitmq.producer.InvoiceProducer;
+import com.course.rabbitmq.entity.DummyMessage;
+import com.course.rabbitmq.producer.AnotherDummyProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.time.LocalDate;
 
 @SpringBootApplication
 public class ProducerApplication implements CommandLineRunner {
@@ -27,8 +25,11 @@ public class ProducerApplication implements CommandLineRunner {
 //    @Autowired
 //    private ReliableProducer reliableProducer;
 
+//    @Autowired
+//    private InvoiceProducer invoiceProducer;
+
     @Autowired
-    private InvoiceProducer invoiceProducer;
+    private AnotherDummyProducer anotherDummyProducer;
 
     public static void main(String[] args) {
         SpringApplication.run(ProducerApplication.class, args);
@@ -36,11 +37,14 @@ public class ProducerApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        for (int i = 0; i < 10; i++) {
-            var invoiceNumber = "INV-" + i;
-            var invoiceCancelledMessage = new InvoiceCancelledMessage(invoiceNumber, LocalDate.now(), "Cancelled invoice");
-            invoiceProducer.sendInvoiceCancelled(invoiceCancelledMessage);
-        }
+        var dummyMessage = new DummyMessage("Content", 1);
+        anotherDummyProducer.sendDummy(dummyMessage);
+
+//        for (int i = 0; i < 10; i++) {
+//            var invoiceNumber = "INV-" + i;
+//            var invoiceCancelledMessage = new InvoiceCancelledMessage(invoiceNumber, LocalDate.now(), "Cancelled invoice");
+//            invoiceProducer.sendInvoiceCancelled(invoiceCancelledMessage);
+//        }
 
 //        var dummyMessage = new DummyMessage("Dummy content", 1);
 //
