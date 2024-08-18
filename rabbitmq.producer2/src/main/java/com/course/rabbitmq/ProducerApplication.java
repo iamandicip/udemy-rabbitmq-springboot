@@ -1,13 +1,13 @@
 package com.course.rabbitmq;
 
-import com.course.rabbitmq.entity.DummyMessage;
-import com.course.rabbitmq.producer.ReliableProducer;
+import com.course.rabbitmq.entity.InvoiceCancelledMessage;
+import com.course.rabbitmq.producer.InvoiceProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.util.concurrent.TimeUnit;
+import java.time.LocalDate;
 
 @SpringBootApplication
 public class ProducerApplication implements CommandLineRunner {
@@ -24,8 +24,11 @@ public class ProducerApplication implements CommandLineRunner {
 //    @Autowired
 //    private SingleActiveProducer singleActiveProducer;
 
+//    @Autowired
+//    private ReliableProducer reliableProducer;
+
     @Autowired
-    private ReliableProducer reliableProducer;
+    private InvoiceProducer invoiceProducer;
 
     public static void main(String[] args) {
         SpringApplication.run(ProducerApplication.class, args);
@@ -33,17 +36,23 @@ public class ProducerApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        var dummyMessage = new DummyMessage("Dummy content", 1);
+        for (int i = 0; i < 10; i++) {
+            var invoiceNumber = "INV-" + i;
+            var invoiceCancelledMessage = new InvoiceCancelledMessage(invoiceNumber, LocalDate.now(), "Cancelled invoice");
+            invoiceProducer.sendInvoiceCancelled(invoiceCancelledMessage);
+        }
 
-        System.out.println("--------------------------------");
-        System.out.println("Calling sendMessageToInvalidExchange()");
-        reliableProducer.sendMessageToInvalidExchange(dummyMessage);
-
-        TimeUnit.SECONDS.sleep(2);
-
-        System.out.println("--------------------------------");
-        System.out.println("Calling sendWithInvalidRoutingKey()");
-        reliableProducer.sendMessageWithInvalidRoutingKey(dummyMessage);
+//        var dummyMessage = new DummyMessage("Dummy content", 1);
+//
+//        System.out.println("--------------------------------");
+//        System.out.println("Calling sendMessageToInvalidExchange()");
+//        reliableProducer.sendMessageToInvalidExchange(dummyMessage);
+//
+//        TimeUnit.SECONDS.sleep(2);
+//
+//        System.out.println("--------------------------------");
+//        System.out.println("Calling sendWithInvalidRoutingKey()");
+//        reliableProducer.sendMessageWithInvalidRoutingKey(dummyMessage);
 
 
 //        singleActiveProducer.sendDummy();
