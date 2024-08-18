@@ -1,10 +1,16 @@
 package com.course.rabbitmq;
 
-import com.course.rabbitmq.producer.MultiplePrefetchProducer;
+import com.course.rabbitmq.entity.InvoiceCancelledMessage;
+import com.course.rabbitmq.entity.InvoiceCreatedMessage;
+import com.course.rabbitmq.entity.InvoicePaidMessage;
+import com.course.rabbitmq.producer.InvoiceProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.time.LocalDate;
+import java.util.concurrent.ThreadLocalRandom;
 
 @SpringBootApplication
 public class ProducerApplication implements CommandLineRunner {
@@ -12,8 +18,11 @@ public class ProducerApplication implements CommandLineRunner {
 //    @Autowired
 //    private DummyProducer dummyProducer;
 
+//    @Autowired
+//    private MultiplePrefetchProducer multiplePrefetchProducer;
+
     @Autowired
-    private MultiplePrefetchProducer multiplePrefetchProducer;
+    private InvoiceProducer invoiceProducer;
 
     public static void main(String[] args) {
         SpringApplication.run(ProducerApplication.class, args);
@@ -21,11 +30,24 @@ public class ProducerApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        multiplePrefetchProducer.simulateTransaction();
-        multiplePrefetchProducer.simulateScheduler();
+        var randomInvoiceNumber = "INV-" + ThreadLocalRandom.current().nextInt(100, 200);
+        var invoiceCreatedMessage = new InvoiceCreatedMessage(144.4, LocalDate.now(), "USD", randomInvoiceNumber);
+        invoiceProducer.sendInvoiceCreated(invoiceCreatedMessage);
 
-        System.out.println("All data sent");
-        
+        randomInvoiceNumber = "INV-" + ThreadLocalRandom.current().nextInt(200, 300);
+        var randomPaymentNumber = "PAY-" + ThreadLocalRandom.current().nextInt(1000, 2000);
+        var invoicePaidMessage = new InvoicePaidMessage(randomInvoiceNumber, LocalDate.now(), randomPaymentNumber);
+        invoiceProducer.sendInvoicePaid(invoicePaidMessage);
+
+        randomInvoiceNumber = "INV-" + ThreadLocalRandom.current().nextInt(300, 400);
+        var invoiceCancelledMessage = new InvoiceCancelledMessage(randomInvoiceNumber, LocalDate.now(), "Invoice cancelled");
+        invoiceProducer.sendInvoiceCancelled(invoiceCancelledMessage);
+
+//        multiplePrefetchProducer.simulateTransaction();
+//        multiplePrefetchProducer.simulateScheduler();
+//
+//        System.out.println("All data sent");
+
 //        var dummyMessage = new DummyMessage("Content", 1);
 //        dummyProducer.sendDummy(dummyMessage);
 
