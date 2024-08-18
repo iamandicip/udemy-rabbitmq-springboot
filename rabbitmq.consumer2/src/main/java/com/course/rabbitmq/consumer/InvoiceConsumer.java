@@ -5,9 +5,8 @@ import com.course.rabbitmq.entity.InvoicePaidMessage;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.stereotype.Service;
 
-@Service
+//@Service
 @RabbitListener(queues = "q.invoice")
 @Slf4j
 public class InvoiceConsumer {
