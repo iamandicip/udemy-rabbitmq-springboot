@@ -1,7 +1,6 @@
 package com.course.rabbitmq;
 
-import com.course.rabbitmq.entity.DummyMessage;
-import com.course.rabbitmq.producer.AnotherDummyProducer;
+import com.course.rabbitmq.producer.StreamHelloProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -28,8 +27,11 @@ public class ProducerApplication implements CommandLineRunner {
 //    @Autowired
 //    private InvoiceProducer invoiceProducer;
 
+//    @Autowired
+//    private AnotherDummyProducer anotherDummyProducer;
+
     @Autowired
-    private AnotherDummyProducer anotherDummyProducer;
+    private StreamHelloProducer streamHelloProducer;
 
     public static void main(String[] args) {
         SpringApplication.run(ProducerApplication.class, args);
@@ -37,8 +39,11 @@ public class ProducerApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        var dummyMessage = new DummyMessage("Content", 1);
-        anotherDummyProducer.sendDummy(dummyMessage);
+        for (int i = 0; i < 3; i++) {
+            streamHelloProducer.sendHelloUsingExchange("Hello stream XXX " + i);
+        }
+//        var dummyMessage = new DummyMessage("Content", 1);
+//        anotherDummyProducer.sendDummy(dummyMessage);
 
 //        for (int i = 0; i < 10; i++) {
 //            var invoiceNumber = "INV-" + i;
