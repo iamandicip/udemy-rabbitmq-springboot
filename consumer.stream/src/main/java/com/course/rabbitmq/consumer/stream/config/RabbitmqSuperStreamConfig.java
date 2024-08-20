@@ -3,17 +3,15 @@ package com.course.rabbitmq.consumer.stream.config;
 import com.rabbitmq.stream.Environment;
 import com.rabbitmq.stream.OffsetSpecification;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.rabbit.stream.listener.StreamListenerContainer;
 
 import java.util.concurrent.TimeUnit;
 
-@Configuration
+//@Configuration
 @Slf4j
 public class RabbitmqSuperStreamConfig {
 
-    @Bean
+    //    @Bean
     StreamListenerContainer superStreamNumberContainer() {
         var env = Environment.builder().maxConsumersByConnection(1).build();
         var container = new StreamListenerContainer(env);

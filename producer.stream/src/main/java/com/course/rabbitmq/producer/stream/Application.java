@@ -1,10 +1,14 @@
 package com.course.rabbitmq.producer.stream;
 
-import com.course.rabbitmq.producer.stream.producer.SuperStreamNumberProducer;
+import com.course.rabbitmq.producer.stream.entity.Invoice;
+import com.course.rabbitmq.producer.stream.producer.SuperStreamInvoiceProducer;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import java.util.concurrent.ThreadLocalRandom;
 
 @SpringBootApplication
 public class Application implements CommandLineRunner {
@@ -12,8 +16,14 @@ public class Application implements CommandLineRunner {
 //    @Autowired
 //    private StreamNumberProducer streamNumberProducer;
 
+//    @Autowired
+//    private SuperStreamNumberProducer superStreamNumberProducer;
+
     @Autowired
-    private SuperStreamNumberProducer superStreamNumberProducer;
+    private SuperStreamInvoiceProducer producer;
+
+    @Autowired
+    private RabbitTemplate dummyRabbitTemplate;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -21,8 +31,21 @@ public class Application implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+        dummyRabbitTemplate.convertAndSend("Test");
+
+        for (int i = 0; i < 10; i++) {
+            var invoiceAmount = ThreadLocalRandom.current().nextInt(10, 1000);
+            var invoiceCreated = new Invoice("INV-" + i, Invoice.Status.CREATED, invoiceAmount);
+            var invoiceApproved = new Invoice("INV-" + i, Invoice.Status.APPROVED, invoiceAmount);
+
+            producer.sendInvoiceUsingRabbitStreamTemplate(invoiceCreated);
+            producer.sendInvoiceUsingRabbitStreamTemplate(invoiceApproved);
+        }
+
+        System.out.println("All invoices sent");
+
 //        streamNumberProducer.sendNumbers(5, 1000);
-        superStreamNumberProducer.sendNumbersUsingRabbitTemplate(0, 10);
-        superStreamNumberProducer.sendNumbersUsingRabbitStreamTemplate(10, 20);
+//        superStreamNumberProducer.sendNumbersUsingRabbitTemplate(0, 10);
+//        superStreamNumberProducer.sendNumbersUsingRabbitStreamTemplate(10, 20);
     }
 }
