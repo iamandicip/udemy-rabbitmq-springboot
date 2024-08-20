@@ -3,15 +3,13 @@ package com.course.rabbitmq.consumer.stream.config;
 import com.rabbitmq.stream.Environment;
 import com.rabbitmq.stream.OffsetSpecification;
 import org.springframework.amqp.rabbit.listener.RabbitListenerContainerFactory;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.rabbit.stream.config.StreamRabbitListenerContainerFactory;
 import org.springframework.rabbit.stream.listener.StreamListenerContainer;
 
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 
-@Configuration
+//@Configuration
 public class RabbitMqStreamConfig {
     public static final String STREAM_NUMBER = "s.number";
 
@@ -31,7 +29,7 @@ public class RabbitMqStreamConfig {
 
     private static final String CONSUMER_SINGLE_ACTIVE_01 = "consumer-single-active-01";
 
-    @Bean
+    //    @Bean
     RabbitListenerContainerFactory<StreamListenerContainer> absoluteContainerFactoryOne(Environment env) {
         var factory = new StreamRabbitListenerContainerFactory(env);
         factory.setNativeListener(true);
@@ -43,7 +41,7 @@ public class RabbitMqStreamConfig {
         return factory;
     }
 
-    @Bean
+    //    @Bean
     RabbitListenerContainerFactory<StreamListenerContainer> firstContainerFactoryOne(Environment env) {
         var factory = new StreamRabbitListenerContainerFactory(env);
         factory.setNativeListener(true);
@@ -55,7 +53,7 @@ public class RabbitMqStreamConfig {
         return factory;
     }
 
-    @Bean
+    //    @Bean
     RabbitListenerContainerFactory<StreamListenerContainer> lastContainerFactoryOne(Environment env) {
         var factory = new StreamRabbitListenerContainerFactory(env);
         factory.setNativeListener(true);
@@ -67,7 +65,7 @@ public class RabbitMqStreamConfig {
         return factory;
     }
 
-    @Bean
+    //    @Bean
     RabbitListenerContainerFactory<StreamListenerContainer> nextContainerFactoryOne(Environment env) {
         var factory = new StreamRabbitListenerContainerFactory(env);
         factory.setNativeListener(true);
@@ -79,7 +77,7 @@ public class RabbitMqStreamConfig {
         return factory;
     }
 
-    @Bean
+    //    @Bean
     RabbitListenerContainerFactory<StreamListenerContainer> timestampContainerFactoryOne(Environment env) {
         var timestampForOffset = ZonedDateTime.now(ZoneOffset.UTC).minusMinutes(5).toEpochSecond() * 1000;
         var factory = new StreamRabbitListenerContainerFactory(env);
@@ -92,7 +90,7 @@ public class RabbitMqStreamConfig {
         return factory;
     }
 
-    @Bean
+    //    @Bean
     RabbitListenerContainerFactory<StreamListenerContainer> absoluteContainerFactoryTwo(Environment env) {
         var factory = new StreamRabbitListenerContainerFactory(env);
         factory.setNativeListener(true);
@@ -104,7 +102,7 @@ public class RabbitMqStreamConfig {
         return factory;
     }
 
-    @Bean
+    //    @Bean
     RabbitListenerContainerFactory<StreamListenerContainer> firstContainerFactoryTwo(Environment env) {
         var factory = new StreamRabbitListenerContainerFactory(env);
         factory.setNativeListener(true);
@@ -116,7 +114,7 @@ public class RabbitMqStreamConfig {
         return factory;
     }
 
-    @Bean
+    //    @Bean
     RabbitListenerContainerFactory<StreamListenerContainer> lastContainerFactoryTwo(Environment env) {
         var factory = new StreamRabbitListenerContainerFactory(env);
         factory.setNativeListener(true);
@@ -128,7 +126,7 @@ public class RabbitMqStreamConfig {
         return factory;
     }
 
-    @Bean
+    //    @Bean
     RabbitListenerContainerFactory<StreamListenerContainer> nextContainerFactoryTwo(Environment env) {
         var factory = new StreamRabbitListenerContainerFactory(env);
         factory.setNativeListener(true);
@@ -140,7 +138,7 @@ public class RabbitMqStreamConfig {
         return factory;
     }
 
-    @Bean
+    //    @Bean
     RabbitListenerContainerFactory<StreamListenerContainer> timestampContainerFactoryTwo(Environment env) {
         var timestampForOffset = ZonedDateTime.now(ZoneOffset.UTC).minusMinutes(5).toEpochSecond() * 1000;
         var factory = new StreamRabbitListenerContainerFactory(env);
@@ -153,7 +151,7 @@ public class RabbitMqStreamConfig {
         return factory;
     }
 
-    @Bean
+    //    @Bean
     RabbitListenerContainerFactory<StreamListenerContainer> firstContainerFactoryThree(Environment env) {
         var factory = new StreamRabbitListenerContainerFactory(env);
         factory.setNativeListener(true);
@@ -165,7 +163,7 @@ public class RabbitMqStreamConfig {
         return factory;
     }
 
-    @Bean
+    //    @Bean
     RabbitListenerContainerFactory<StreamListenerContainer> singleActiveContainerFactoryOne(Environment env) {
         var factory = new StreamRabbitListenerContainerFactory(env);
         factory.setNativeListener(true);
