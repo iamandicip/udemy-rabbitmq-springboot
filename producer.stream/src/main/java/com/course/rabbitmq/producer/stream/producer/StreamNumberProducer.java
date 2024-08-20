@@ -13,7 +13,7 @@ public class StreamNumberProducer {
     public void sendNumbers(int start, int end) {
         for (int i = start; i < end; i++) {
             var str = "Number-" + i;
-            rabbitTemplate.convertAndSend("x.number", "", str);
+            rabbitTemplate.convertAndSend("x.number", null, str);
         }
 
         System.out.printf("Sent %d to %d", start, (end - 1));

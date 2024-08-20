@@ -9,15 +9,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class Application implements CommandLineRunner {
 
-	@Autowired
-	private StreamNumberProducer streamNumberProducer;
+    @Autowired
+    private StreamNumberProducer streamNumberProducer;
 
-	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
 
-	@Override
-	public void run(String... args) throws Exception {
-		streamNumberProducer.sendNumbers(0, 5);
-	}
+    @Override
+    public void run(String... args) throws Exception {
+        streamNumberProducer.sendNumbers(5, 1000);
+    }
 }

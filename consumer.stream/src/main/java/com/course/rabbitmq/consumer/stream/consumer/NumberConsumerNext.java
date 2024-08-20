@@ -1,11 +1,10 @@
 package com.course.rabbitmq.consumer.stream.consumer;
 
+import com.rabbitmq.stream.Message;
 import com.rabbitmq.stream.MessageHandler;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.amqp.core.Message;
-import org.springframework.stereotype.Service;
 
-@Service
+//@Service
 @Slf4j
 public class NumberConsumerNext {
 
